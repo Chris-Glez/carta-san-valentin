@@ -106,8 +106,15 @@
 
   p, h2 { color: white; }
 
-  button {
+  .btn-group {
     margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+  }
+
+  button {
     padding: 12px 30px;
     border-radius: 30px;
     border: none;
@@ -124,10 +131,7 @@
     background: transparent;
     color: white;
     border: 1px solid white;
-    position: absolute; /* necesario para moverlo dentro del card */
-    left: 50%;
-    top: 60%;
-    transform: translate(-50%, -50%);
+    position: relative; /* se moverá dentro del contenedor flex */
   }
 
   .flower {
@@ -186,8 +190,10 @@
     <h1 class="main-name">Perla Xochilt 💖</h1>
     <p>Este 14 de febrero quiero preguntarte algo muy especial…</p>
     <h2>¿Te gustaría ser mi San Valentín? 🌷</h2>
-    <button id="yesBtn">Sí, acepto 🌻</button>
-    <button id="noBtn">No</button>
+    <div class="btn-group">
+      <button id="yesBtn">Sí, acepto 🌻</button>
+      <button id="noBtn">No</button>
+    </div>
   </div>
 </div>
 
@@ -232,34 +238,34 @@ function createFlower(){
 }
 setInterval(createFlower,900);
 
-// Botón NO travieso
+// Botón NO travieso rápido
 let moveInterval;
 noBtn.addEventListener('mouseenter',()=>{
-  let x = noBtn.offsetLeft;
-  let y = noBtn.offsetTop;
+  let x = 0;
+  let y = 0;
   let dirX = 1;
   let dirY = 1;
 
   if(moveInterval) clearInterval(moveInterval);
   moveInterval = setInterval(()=>{
-    let maxX = card.clientWidth - noBtn.clientWidth - 10;
-    let maxY = card.clientHeight - noBtn.clientHeight - 10;
+    let maxX = noBtn.parentElement.clientWidth - noBtn.clientWidth;
+    let maxY = noBtn.parentElement.clientHeight - noBtn.clientHeight;
 
     if(x>=maxX) dirX=-1;
     if(x<=0) dirX=1;
     if(y>=maxY) dirY=-1;
     if(y<=0) dirY=1;
 
-    x += dirX*10;
+    x += dirX*15; // más rápido
     y += dirY*10;
 
-    noBtn.style.left = x+'px';
-    noBtn.style.top = y+'px';
-  },100);
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  },50); // más rápido
 });
 
 noBtn.addEventListener('mouseleave',()=>{
   if(moveInterval) clearInterval(moveInterval);
+  noBtn.style.transform = 'translate(0,0)';
 });
 
 // Cuando dice SÍ
@@ -288,12 +294,10 @@ yesBtn.addEventListener('click',()=>{
   fillRosesCelebration(leftSideCelebration);
   fillRosesCelebration(rightSideCelebration);
 
-  // Tulipanes y girasoles cayendo rápido
   function createCelebrationFlower(){
     const flower=document.createElement('div');
     flower.classList.add('flower');
     flower.style.fontSize='30px';
-    // Alternar entre tulipán y girasol
     flower.innerText = Math.random()<0.5?'🌷':'🌻';
     flower.style.left=Math.random()*100+'vw';
     flower.style.animationDuration=(Math.random()*2+2)+'s';
