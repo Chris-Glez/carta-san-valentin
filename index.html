@@ -1,254 +1,416 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Carta 💖</title>
- 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300&display=swap" rel="stylesheet" />
 
 <style>
-body{
-    margin:0;
-    padding:0;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:'Poppins',sans-serif;
-    background:white;
-    overflow:hidden;
-    position:relative;
-}
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    background: white;
+    overflow: hidden;
+    position: relative;
+    transition: background 1s ease;
+  }
 
-/* ROSAS LATERALES SOLO EN FONDO BLANCO */
-.side{
-    position:fixed;
-    top:0;
-    width:120px;
-    height:100%;
-    background:white;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-around;
-    align-items:center;
-    font-size:40px;
-    z-index:0;
-}
-.left{ left:0; }
-.right{ right:0; }
+  /* LATERALES LLENAS DE FLORES */
+  .side {
+    position: fixed;
+    top: 0;
+    width: 120px;
+    height: 100%;
+    background: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    font-size: 24px;
+    line-height: 1.1;
+    z-index: 0;
+    padding: 8px 4px;
+  }
+  .left {
+    left: 0;
+  }
+  .right {
+    right: 0;
+  }
 
-/* ZONA CENTRAL ROSITA */
-.center-bg{
-    position:absolute;
-    width:70%;
-    height:100%;
-    background:linear-gradient(135deg,#ff9eb5,#ff6f91);
-    z-index:-1;
-    border-radius:20px;
-}
+  /* Las flores llenan los lados */
+  .side span {
+    margin: 2px;
+  }
 
-/* CONTENEDOR */
-.container{
-    text-align:center;
-    z-index:2;
-}
+  /* FONDO CENTRAL ROSITA */
+  .center-bg {
+    position: absolute;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff9eb5, #ff6f91);
+    z-index: -1;
+    border-radius: 20px;
+    transition: background 1s ease;
+  }
 
-/* SOBRE */
-.envelope{
-    width:420px;
-    height:280px;
-    background:white;
-    border-radius:12px;
-    box-shadow:0 20px 40px rgba(0,0,0,0.3);
-    cursor:pointer;
-    position:relative;
-    transition:transform .6s ease;
-}
+  /* CONTENEDOR */
+  .container {
+    text-align: center;
+    z-index: 2;
+  }
 
-.envelope:hover{
-    transform:scale(1.05);
-}
+  /* SOBRE */
+  .envelope {
+    width: 420px;
+    height: 280px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.6s ease;
+    overflow: hidden;
+  }
 
-.envelope.open{
-    transform:scale(0);
-}
+  .envelope:hover {
+    transform: scale(1.05);
+  }
 
-/* TEXTO DENTRO DEL SOBRE */
-.inside-text{
-    position:absolute;
-    top:60px;
-    width:100%;
-    text-align:center;
-    font-family:'Playfair Display',serif;
-    color:#c2185b;
-    font-size:18px;
-    padding:0 20px;
-}
+  .envelope.open {
+    transform: scale(0);
+  }
 
-.envelope-text{
-    position:absolute;
-    bottom:25px;
-    width:100%;
-    text-align:center;
-    font-family:'Playfair Display',serif;
-    color:#d63384;
-    font-size:20px;
-}
+  /* TEXTO DENTRO DEL SOBRE */
+  .inside-text {
+    position: absolute;
+    top: 60px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    color: #c2185b;
+    font-size: 18px;
+    padding: 0 20px;
+  }
 
-/* CARTA */
-.card{
-    display:none;
-    background:linear-gradient(135deg,#ff758c,#ff7eb3);
-    padding:60px;
-    border-radius:25px;
-    width:550px;
-    max-width:90%;
-    box-shadow:0 20px 50px rgba(0,0,0,0.3);
-    animation:fadeIn 1.2s ease forwards;
-}
+  .envelope-text {
+    position: absolute;
+    bottom: 25px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    color: #d63384;
+    font-size: 20px;
+  }
 
-/* NOMBRE QUE LATE */
-.main-name{
-    font-family:'Playfair Display',serif;
-    font-size:44px;
-    color:white;
-    animation:heartbeat 1.2s infinite;
-}
+  /* CARTA */
+  .card {
+    display: none;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    padding: 60px;
+    border-radius: 25px;
+    width: 550px;
+    max-width: 90%;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1.2s ease forwards;
+  }
 
-@keyframes heartbeat{
-    0%{ transform:scale(1); }
-    25%{ transform:scale(1.1); }
-    40%{ transform:scale(1); }
-    60%{ transform:scale(1.1); }
-    100%{ transform:scale(1); }
-}
+  /* NOMBRE QUE LATE */
+  .main-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    color: white;
+    animation: heartbeat 1.2s infinite;
+  }
 
-p,h2{ color:white; }
+  @keyframes heartbeat {
+    0% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(1.1);
+    }
+    40% {
+      transform: scale(1);
+    }
+    60% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 
-button{
-    margin-top:25px;
-    padding:12px 30px;
-    border-radius:30px;
-    border:none;
-    font-size:16px;
-    cursor:pointer;
-    transition:.3s;
-}
+  p,
+  h2 {
+    color: white;
+  }
 
-#yesBtn{
-    background:white;
-    color:#d63384;
-}
+  button {
+    margin-top: 25px;
+    padding: 12px 30px;
+    border-radius: 30px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+  }
 
-#yesBtn:hover{
-    transform:scale(1.2);
-}
+  #yesBtn {
+    background: white;
+    color: #d63384;
+  }
 
-/* BOTÓN NO GIRATORIO */
-#noBtn{
-    background:transparent;
-    color:white;
-    border:1px solid white;
-    position:absolute;
-}
+  #yesBtn:hover {
+    transform: scale(1.2);
+  }
 
-.spin{
-    animation:spin 1s linear infinite;
-}
+  /* BOTÓN NO QUE GIRA Y SE MUEVE */
+  #noBtn {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    position: absolute;
+    left: 60%;
+    top: 60%;
+    transform-origin: center center;
+  }
 
-@keyframes spin{
-    from{ transform:rotate(0deg); }
-    to{ transform:rotate(360deg); }
-}
+  .spin {
+    animation: spin 1s linear infinite;
+  }
 
-/* TULIPANES */
-.flower{
-    position:fixed;
-    top:-10px;
-    font-size:26px;
-    animation:fall linear infinite;
-    opacity:.8;
-}
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 
-@keyframes fall{
-    to{ transform:translateY(110vh); }
-}
+  /* TULIPANES */
+  .flower {
+    position: fixed;
+    top: -10px;
+    font-size: 26px;
+    animation: fall linear infinite;
+    opacity: 0.8;
+  }
 
-@keyframes fadeIn{
-    from{ opacity:0; transform:translateY(40px); }
-    to{ opacity:1; transform:translateY(0); }
-}
+  @keyframes fall {
+    to {
+      transform: translateY(110vh);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* FONDO CON FLORES Y TEXTO DESPUÉS DE "Sí" */
+  .celebration-bg {
+    position: fixed;
+    top: 0;
+    left: 120px;
+    width: calc(100% - 240px);
+    height: 100vh;
+    background: linear-gradient(135deg, #ff9eb5, #ff6f91);
+    overflow: hidden;
+    z-index: 10;
+  }
+
+  .celebration-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    z-index: 20;
+    max-width: 90vw;
+  }
+
+  .celebration-message h1 {
+    font-size: 56px;
+    margin-bottom: 20px;
+  }
+
+  .celebration-message p {
+    font-size: 24px;
+  }
 </style>
 </head>
 
 <body>
+  <div class="side left" id="leftSide"></div>
+  <div class="side right" id="rightSide"></div>
+  <div class="center-bg" id="centerBg"></div>
 
-<div class="side left">🌹 🌹 🌹 🌹 🌹</div>
-<div class="side right">🌹 🌹 🌹 🌹 🌹</div>
-<div class="center-bg"></div>
-
-<div class="container">
-
-<div class="envelope" id="envelope">
-    <div class="inside-text">
-        <strong>De:</strong> Christian Adrián González Ponce<br>
+  <div class="container">
+    <div class="envelope" id="envelope">
+      <div class="inside-text">
+        <strong>De:</strong> Christian Adrián González Ponce<br />
         <strong>Para:</strong> Perla Xochilt Montes de Oca Ramos
+      </div>
+      <div class="envelope-text">💌 Toca para abrir</div>
     </div>
-    <div class="envelope-text">💌 Toca para abrir</div>
-</div>
 
-<div class="card" id="card">
-    <h1 class="main-name">Perla Xochilt 💖</h1>
-    <p>Este 14 de febrero quiero preguntarte algo muy especial…</p>
-    <h2>¿Te gustaría ser mi San Valentín? 🌷</h2>
-    <button id="yesBtn">Sí, acepto ✨</button>
-    <button id="noBtn">No</button>
-</div>
+    <div class="card" id="card">
+      <h1 class="main-name">Perla Xochilt 💖</h1>
+      <p>Este 14 de febrero quiero preguntarte algo muy especial…</p>
+      <h2>¿Te gustaría ser mi San Valentín? 🌷</h2>
+      <button id="yesBtn">Sí, acepto ✨</button>
+      <button id="noBtn">No</button>
+    </div>
+  </div>
 
-</div>
+  <script>
+    const envelope = document.getElementById('envelope');
+    const card = document.getElementById('card');
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const leftSide = document.getElementById('leftSide');
+    const rightSide = document.getElementById('rightSide');
+    const centerBg = document.getElementById('centerBg');
 
-<script>
-const envelope=document.getElementById("envelope");
-const card=document.getElementById("card");
-const noBtn=document.getElementById("noBtn");
-const yesBtn=document.getElementById("yesBtn");
+    // Llenar laterales con rosas
+    function fillRoses(side) {
+      side.innerHTML = '';
+      for (let i = 0; i < 60; i++) {
+        const rose = document.createElement('span');
+        rose.textContent = '🌹';
+        side.appendChild(rose);
+      }
+    }
+    fillRoses(leftSide);
+    fillRoses(rightSide);
 
-envelope.addEventListener("click",()=>{
-    envelope.classList.add("open");
-    setTimeout(()=>{
-        envelope.style.display="none";
-        card.style.display="block";
-    },600);
-});
+    envelope.addEventListener('click', () => {
+      envelope.classList.add('open');
+      setTimeout(() => {
+        envelope.style.display = 'none';
+        card.style.display = 'block';
+      }, 600);
+    });
+
+    // Botón NO gira y se mueve dentro de la carta
+    let moveInterval;
+    noBtn.addEventListener('mouseenter', () => {
+      noBtn.classList.add('spin');
+
+      let angle = 0;
+      let x = noBtn.offsetLeft;
+      let y = noBtn.offsetTop;
+      let directionX = 1;
+      let directionY = 1;
+
+      if (moveInterval) clearInterval(moveInterval);
+      moveInterval = setInterval(() => {
+        angle += 15;
+        if (angle >= 360) angle = 0;
+
+        // Mover dentro límites del card
+        let maxX = card.clientWidth - noBtn.clientWidth - 20;
+        let maxY = card.clientHeight - noBtn.clientHeight - 20;
+
+        // Cambiar dirección si toca borde
+        if (x >= maxX) directionX = -1;
+        if (x <= 0) directionX = 1;
+        if (y >= maxY) directionY = -1;
+        if (y <= 0) directionY = 1;
+
+        x += directionX * 10;
+        y += directionY * 10;
+
+        noBtn.style.left = x + 'px';
+        noBtn.style.top = y + 'px';
+        noBtn.style.transform = `rotate(${angle}deg)`;
+      }, 100);
+    });
+
+    noBtn.addEventListener('mouseleave', () => {
+      noBtn.classList.remove('spin');
+      if (moveInterval) clearInterval(moveInterval);
+      // Volver al centro aproximado
+      noBtn.style.left = '60%';
+      noBtn.style.top = '60%';
+      noBtn.style.transform = 'rotate(0deg)';
+    });
+
+    // Tulipanes cayendo
+    function createFlower() {
+      const flower = document.createElement('div');
+      flower.classList.add('flower');
+      flower.innerText = '🌷';
+      flower.style.left = Math.random() * 100 + 'vw';
+      flower.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      document.body.appendChild(flower);
+      setTimeout(() => {
+        flower.remove();
+      }, 6000);
+    }
+    setInterval(createFlower, 900);
+
+    // Cuando dice SÍ
+    yesBtn.addEventListener('click', () => {
+      // Limpiar el body y poner fondo de celebración
+      document.body.innerHTML = `
+        <div class="side left" id="leftSideCelebration"></div>
+        <div class="side right" id="rightSideCelebration"></div>
+        <div class="celebration-bg" id="celebrationBg"></div>
+        <div class="celebration-message">
+          <h1>💖 Gracias, Perla 💖</h1>
+          <p>Este 14 de febrero será un día inolvidable lleno de amor y magia 🌷✨</p>
+        </div>
+      `;
  
-/* NO gira muchas veces */
-noBtn.addEventListener("mouseover",()=>{
-    noBtn.classList.add("spin");
-});
+      // Llenar laterales con rosas en celebración también
+      const leftSideCelebration = document.getElementById('leftSideCelebration');
+      const rightSideCelebration = document.getElementById('rightSideCelebration');
 
-/* Tulipanes */
-function createFlower(){
-    const flower=document.createElement("div");
-    flower.classList.add("flower");
-    flower.innerText="🌷";
-    flower.style.left=Math.random()*100+"vw";
-    flower.style.animationDuration=(Math.random()*3+3)+"s";
-    document.body.appendChild(flower);
-    setTimeout(()=>{ flower.remove(); },6000);
-}
-setInterval(createFlower,900);
+      function fillRosesCelebration(side) {
+        side.innerHTML = '';
+        for (let i = 0; i < 60; i++) {
+          const rose = document.createElement('span');
+          rose.textContent = '🌹';
+          side.appendChild(rose);
+        }
+      }
+      fillRosesCelebration(leftSideCelebration);
+      fillRosesCelebration(rightSideCelebration);
 
-yesBtn.addEventListener("click",()=>{
-    for(let i=0;i<50;i++){ createFlower(); }
-    document.body.innerHTML=`
-    <div style="text-align:center;margin-top:40vh;font-family:Playfair Display;">
-        <h1 style="color:#c2185b;">💖 Gracias 💖</h1>
-        <p style="font-size:22px;">Prometo que será un día hermoso 🌷</p>
-    </div>`;
-});
-</script>
-
+      // Añadir muchas flores cayendo rápido
+      function createCelebrationFlower() {
+        const flower = document.createElement('div');
+        flower.classList.add('flower');
+        flower.style.fontSize = '30px';
+        flower.innerText = '🌷';
+        flower.style.left = Math.random() * 100 + 'vw';
+        flower.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        document.body.appendChild(flower);
+        setTimeout(() => {
+          flower.remove();
+        }, 6000);
+      }
+      setInterval(createCelebrationFlower, 250);
+    });
+  </script>
 </body>
 </html>
-
