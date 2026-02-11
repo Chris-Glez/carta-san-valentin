@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Perla Xochitl 💌</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #f8cdda, #fbc2eb, #f6d365);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+.envelope {
+    width: 300px;
+    height: 200px;
+    background: #ffffffcc;
+    position: relative;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transition: 0.5s;
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: #fff;
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.envelope-text {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    color: #d63384;
+}
+
+.card {
+    display: none;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    animation: fadeIn 1.5s ease forwards;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.name {
+    font-size: 20px;
+    margin-top: 10px;
+    color: #fff;
+    font-style: italic;
+}
+
+p {
+    color: #fff;
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 25px;
+    border-radius: 30px;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background: #ffffff;
+    color: #d63384;
+}
+
+#yesBtn:hover {
+    transform: scale(1.1);
+}
+
+#noBtn {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    position: absolute;
+}
+
+.flower {
+    position: fixed;
+    top: -10px;
+    font-size: 20px;
+    animation: fall linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="envelope" id="envelope">
+    <div class="envelope-text">💌 Toca para abrir</div>
+</div>
+
+<div class="card" id="card">
+    <h1>Para alguien muy especial 💐</h1>
+    <div class="name">Perla Xochitl Montes de Oca Ramos</div>
+    <p>Este sábado 14 de febrero quiero preguntarte algo muy especial…</p>
+    <h1>¿Te gustaría ser mi San Valentín? 💖</h1>
+    <button id="yesBtn">Sí, acepto ✨</button>
+    <button id="noBtn">No</button>
+</div>
+
+<script>
+const envelope = document.getElementById("envelope");
+const card = document.getElementById("card");
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+
+envelope.addEventListener("click", () => {
+    envelope.style.display = "none";
+    card.style.display = "block";
+});
+
+noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+
+yesBtn.addEventListener("click", () => {
+    document.body.innerHTML = `
+        <div style="color:white; text-align:center; margin-top:40vh; font-family:Playfair Display;">
+            <h1>💖 Gracias, Perla 💖</h1>
+            <p style="font-size:20px;">Prometo que será un 14 de febrero hermoso ✨🌹</p>
+        </div>
+    `;
+});
+
+function createFlower() {
+    const flower = document.createElement("div");
+    flower.classList.add("flower");
+    flower.innerText = "🌸";
+    flower.style.left = Math.random() * 100 + "vw";
+    flower.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(flower);
+
+    setTimeout(() => {
+        flower.remove();
+    }, 6000);
+}
+
+setInterval(createFlower, 500);
+</script>
+
+</body>
+</html>
