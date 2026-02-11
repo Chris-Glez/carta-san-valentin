@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Perla 💖</title>
+<title>Carta 💖</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300&display=swap" rel="stylesheet">
 
 <style>
 body {
-    margin: 0; 
+    margin: 0;
     padding: 0;
     min-height: 100vh;
     background: white;
@@ -21,104 +21,85 @@ body {
     position: relative;
 }
 
-/* Fondo de rosas a los lados */
-body::before,
-body::after {
-    content: "";
+/* Rosas laterales decorativas */
+.side-roses {
     position: fixed;
     top: 0;
-    width: 150px;
+    width: 120px;
     height: 100%;
-    background-image: url("https://i.imgur.com/5b6XG6F.png");
-    background-size: cover;
-    background-repeat: repeat-y;
-    z-index: -1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 40px;
+    opacity: 0.7;
 }
 
-body::before {
-    left: 0;
-}
+.left { left: 10px; }
+.right { right: 10px; }
 
-body::after {
-    right: 0;
-    transform: scaleX(-1);
-}
-
-/* Contenedor centrado */
+/* Contenedor principal */
 .container {
     text-align: center;
+    z-index: 2;
 }
 
 /* Texto superior */
 .header-text {
     font-family: 'Playfair Display', serif;
     color: #c2185b;
-    margin-bottom: 20px;
-    font-size: 18px;
+    margin-bottom: 25px;
+    font-size: 20px;
 }
 
 /* SOBRE */
 .envelope {
-    width: 380px;
-    height: 260px;
-    background: white;
-    position: relative;
-    border-radius: 10px;
+    width: 420px;
+    height: 280px;
+    background: linear-gradient(145deg, #fff, #f5f5f5);
+    border-radius: 12px;
     cursor: pointer;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    position: relative;
     transition: transform 0.6s ease;
-    perspective: 1000px;
-    margin: auto;
+}
+
+.envelope:hover {
+    transform: scale(1.05);
 }
 
 .envelope.open {
     transform: scale(0);
 }
 
-.flap {
-    position: absolute;
-    width: 100%;
-    height: 130px;
-    background: #fff;
-    top: 0;
-    clip-path: polygon(0 0, 50% 100%, 100% 0);
-    transform-origin: top;
-    transition: transform 0.8s ease;
-}
-
-.envelope.open .flap {
-    transform: rotateX(180deg);
-}
-
 .envelope-text {
     position: absolute;
-    bottom: 30px;
+    bottom: 35px;
     width: 100%;
     text-align: center;
     font-family: 'Playfair Display', serif;
     color: #d63384;
-    font-size: 20px;
+    font-size: 22px;
 }
 
 /* CARTA */
 .card {
     display: none;
     background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    padding: 50px;
+    padding: 60px;
     border-radius: 25px;
     text-align: center;
-    width: 500px;
+    width: 550px;
     max-width: 90%;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-    animation: fadeIn 1.5s ease forwards;
-    margin: auto;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    animation: fadeIn 1.2s ease forwards;
 }
 
 .main-name {
     font-family: 'Playfair Display', serif;
-    font-size: 42px;
-    color: #fff;
-    text-shadow: 0 0 15px #fff;
+    font-size: 44px;
+    color: white;
+    text-shadow: 0 0 20px rgba(255,255,255,0.8);
 }
 
 p, h2 {
@@ -126,7 +107,7 @@ p, h2 {
 }
 
 button {
-    margin-top: 20px;
+    margin-top: 25px;
     padding: 12px 30px;
     border-radius: 30px;
     border: none;
@@ -151,11 +132,11 @@ button {
     position: absolute;
 }
 
-/* Tulipanes */
+/* Tulipanes cayendo */
 .flower {
     position: fixed;
     top: -10px;
-    font-size: 24px;
+    font-size: 26px;
     animation: fall linear infinite;
     opacity: 0.8;
 }
@@ -167,7 +148,7 @@ button {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
+    from { opacity: 0; transform: translateY(40px); }
     to { opacity: 1; transform: translateY(0); }
 }
 </style>
@@ -175,24 +156,31 @@ button {
 
 <body>
 
+<div class="side-roses left">
+🌹 🌹 🌹 🌹 🌹
+</div>
+
+<div class="side-roses right">
+🌹 🌹 🌹 🌹 🌹
+</div>
+
 <div class="container">
 
 <div class="header-text">
-    <strong>De:</strong> Christian Adrián González Ponce<br>
-    <strong>Para:</strong> Perla Xochilt Montes de Oca Ramos
+<strong>De:</strong> Christian Adrián González Ponce<br>
+<strong>Para:</strong> Perla Xochilt Montes de Oca Ramos
 </div>
 
 <div class="envelope" id="envelope">
-    <div class="flap"></div>
-    <div class="envelope-text">💌 Toca para abrir</div>
+<div class="envelope-text">💌 Toca para abrir</div>
 </div>
 
 <div class="card" id="card">
-    <h1 class="main-name">Perla Xochilt 💖</h1>
-    <p>Este 14 de febrero quiero preguntarte algo muy especial…</p>
-    <h2>¿Te gustaría ser mi San Valentín? 🌷</h2>
-    <button id="yesBtn">Sí, acepto ✨</button>
-    <button id="noBtn">No</button>
+<h1 class="main-name">Perla Xochilt 💖</h1>
+<p>Este 14 de febrero quiero preguntarte algo muy especial…</p>
+<h2>¿Te gustaría ser mi San Valentín? 🌷</h2>
+<button id="yesBtn">Sí, acepto ✨</button>
+<button id="noBtn">No</button>
 </div>
 
 </div>
@@ -208,26 +196,26 @@ envelope.addEventListener("click", () => {
     setTimeout(() => {
         envelope.style.display = "none";
         card.style.display = "block";
-    }, 800);
+    }, 600);
 });
 
 noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 80);
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 });
 
 yesBtn.addEventListener("click", () => {
-    for(let i = 0; i < 40; i++) {
+    for(let i = 0; i < 50; i++) {
         createFlower();
     }
 
     document.body.innerHTML = `
-        <div style="color:#c2185b; text-align:center; margin-top:40vh; font-family:Playfair Display;">
-            <h1>💖 Gracias 💖</h1>
-            <p style="font-size:22px;">Prometo que será un día hermoso 🌷</p>
-        </div>
+    <div style="text-align:center; margin-top:40vh; font-family:Playfair Display;">
+        <h1 style="color:#c2185b;">💖 Gracias Mi amooorr💖 Tee amooo muchooo 💖</h1>
+        <p style="font-size:22px;">Prometo que será un día hermoso 🌷</p>
+    </div>
     `;
 });
 
@@ -244,9 +232,8 @@ function createFlower() {
     }, 6000);
 }
 
-setInterval(createFlower, 800);
+setInterval(createFlower, 900);
 </script>
 
 </body>
 </html>
-
