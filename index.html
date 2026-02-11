@@ -5,236 +5,249 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Carta 💖</title>
  
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300&display=swap" rel="stylesheet">
 
 <style>
-body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    background: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Poppins', sans-serif;
-    overflow: hidden;
-    position: relative;
+body{
+    margin:0;
+    padding:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Poppins',sans-serif;
+    background:white;
+    overflow:hidden;
+    position:relative;
 }
 
-/* Rosas laterales decorativas */
-.side-roses {
-    position: fixed;
-    top: 0;
-    width: 120px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    font-size: 40px;
-    opacity: 0.7;
+/* ROSAS LATERALES SOLO EN FONDO BLANCO */
+.side{
+    position:fixed;
+    top:0;
+    width:120px;
+    height:100%;
+    background:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+    align-items:center;
+    font-size:40px;
+    z-index:0;
+}
+.left{ left:0; }
+.right{ right:0; }
+
+/* ZONA CENTRAL ROSITA */
+.center-bg{
+    position:absolute;
+    width:70%;
+    height:100%;
+    background:linear-gradient(135deg,#ff9eb5,#ff6f91);
+    z-index:-1;
+    border-radius:20px;
 }
 
-.left { left: 10px; }
-.right { right: 10px; }
-
-/* Contenedor principal */
-.container {
-    text-align: center;
-    z-index: 2;
-}
-
-/* Texto superior */
-.header-text {
-    font-family: 'Playfair Display', serif;
-    color: #c2185b;
-    margin-bottom: 25px;
-    font-size: 20px;
+/* CONTENEDOR */
+.container{
+    text-align:center;
+    z-index:2;
 }
 
 /* SOBRE */
-.envelope {
-    width: 420px;
-    height: 280px;
-    background: linear-gradient(145deg, #fff, #f5f5f5);
-    border-radius: 12px;
-    cursor: pointer;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    position: relative;
-    transition: transform 0.6s ease;
+.envelope{
+    width:420px;
+    height:280px;
+    background:white;
+    border-radius:12px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.3);
+    cursor:pointer;
+    position:relative;
+    transition:transform .6s ease;
 }
 
-.envelope:hover {
-    transform: scale(1.05);
+.envelope:hover{
+    transform:scale(1.05);
 }
 
-.envelope.open {
-    transform: scale(0);
+.envelope.open{
+    transform:scale(0);
 }
 
-.envelope-text {
-    position: absolute;
-    bottom: 35px;
-    width: 100%;
-    text-align: center;
-    font-family: 'Playfair Display', serif;
-    color: #d63384;
-    font-size: 22px;
+/* TEXTO DENTRO DEL SOBRE */
+.inside-text{
+    position:absolute;
+    top:60px;
+    width:100%;
+    text-align:center;
+    font-family:'Playfair Display',serif;
+    color:#c2185b;
+    font-size:18px;
+    padding:0 20px;
+}
+
+.envelope-text{
+    position:absolute;
+    bottom:25px;
+    width:100%;
+    text-align:center;
+    font-family:'Playfair Display',serif;
+    color:#d63384;
+    font-size:20px;
 }
 
 /* CARTA */
-.card {
-    display: none;
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    padding: 60px;
-    border-radius: 25px;
-    text-align: center;
-    width: 550px;
-    max-width: 90%;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    animation: fadeIn 1.2s ease forwards;
+.card{
+    display:none;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    padding:60px;
+    border-radius:25px;
+    width:550px;
+    max-width:90%;
+    box-shadow:0 20px 50px rgba(0,0,0,0.3);
+    animation:fadeIn 1.2s ease forwards;
 }
 
-.main-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 44px;
-    color: white;
-    text-shadow: 0 0 20px rgba(255,255,255,0.8);
+/* NOMBRE QUE LATE */
+.main-name{
+    font-family:'Playfair Display',serif;
+    font-size:44px;
+    color:white;
+    animation:heartbeat 1.2s infinite;
 }
 
-p, h2 {
-    color: white;
+@keyframes heartbeat{
+    0%{ transform:scale(1); }
+    25%{ transform:scale(1.1); }
+    40%{ transform:scale(1); }
+    60%{ transform:scale(1.1); }
+    100%{ transform:scale(1); }
 }
 
-button {
-    margin-top: 25px;
-    padding: 12px 30px;
-    border-radius: 30px;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
+p,h2{ color:white; }
+
+button{
+    margin-top:25px;
+    padding:12px 30px;
+    border-radius:30px;
+    border:none;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
 }
 
-#yesBtn {
-    background: white;
-    color: #d63384;
+#yesBtn{
+    background:white;
+    color:#d63384;
 }
 
-#yesBtn:hover {
-    transform: scale(1.2);
+#yesBtn:hover{
+    transform:scale(1.2);
 }
 
-#noBtn {
-    background: transparent;
-    color: white;
-    border: 1px solid white;
-    position: absolute;
+/* BOTÓN NO GIRATORIO */
+#noBtn{
+    background:transparent;
+    color:white;
+    border:1px solid white;
+    position:absolute;
 }
 
-/* Tulipanes cayendo */
-.flower {
-    position: fixed;
-    top: -10px;
-    font-size: 26px;
-    animation: fall linear infinite;
-    opacity: 0.8;
+.spin{
+    animation:spin 1s linear infinite;
 }
 
-@keyframes fall {
-    to {
-        transform: translateY(110vh);
-    }
+@keyframes spin{
+    from{ transform:rotate(0deg); }
+    to{ transform:rotate(360deg); }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
+/* TULIPANES */
+.flower{
+    position:fixed;
+    top:-10px;
+    font-size:26px;
+    animation:fall linear infinite;
+    opacity:.8;
+}
+
+@keyframes fall{
+    to{ transform:translateY(110vh); }
+}
+
+@keyframes fadeIn{
+    from{ opacity:0; transform:translateY(40px); }
+    to{ opacity:1; transform:translateY(0); }
 }
 </style>
 </head>
 
 <body>
 
-<div class="side-roses left">
-🌹 🌹 🌹 🌹 🌹
-</div>
-
-<div class="side-roses right">
-🌹 🌹 🌹 🌹 🌹
-</div>
+<div class="side left">🌹 🌹 🌹 🌹 🌹</div>
+<div class="side right">🌹 🌹 🌹 🌹 🌹</div>
+<div class="center-bg"></div>
 
 <div class="container">
 
-<div class="header-text">
-<strong>De:</strong> Christian Adrián González Ponce<br>
-<strong>Para:</strong> Perla Xochilt Montes de Oca Ramos
-</div>
-
 <div class="envelope" id="envelope">
-<div class="envelope-text">💌 Toca para abrir</div>
+    <div class="inside-text">
+        <strong>De:</strong> Christian Adrián González Ponce<br>
+        <strong>Para:</strong> Perla Xochilt Montes de Oca Ramos
+    </div>
+    <div class="envelope-text">💌 Toca para abrir</div>
 </div>
 
 <div class="card" id="card">
-<h1 class="main-name">Perla Xochilt 💖</h1>
-<p>Este 14 de febrero quiero preguntarte algo muy especial…</p>
-<h2>¿Te gustaría ser mi San Valentín? 🌷</h2>
-<button id="yesBtn">Sí, acepto ✨</button>
-<button id="noBtn">No</button>
+    <h1 class="main-name">Perla Xochilt 💖</h1>
+    <p>Este 14 de febrero quiero preguntarte algo muy especial…</p>
+    <h2>¿Te gustaría ser mi San Valentín? 🌷</h2>
+    <button id="yesBtn">Sí, acepto ✨</button>
+    <button id="noBtn">No</button>
 </div>
 
 </div>
 
 <script>
-const envelope = document.getElementById("envelope");
-const card = document.getElementById("card");
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
+const envelope=document.getElementById("envelope");
+const card=document.getElementById("card");
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
 
-envelope.addEventListener("click", () => {
+envelope.addEventListener("click",()=>{
     envelope.classList.add("open");
-    setTimeout(() => {
-        envelope.style.display = "none";
-        card.style.display = "block";
-    }, 600);
+    setTimeout(()=>{
+        envelope.style.display="none";
+        card.style.display="block";
+    },600);
+});
+ 
+/* NO gira muchas veces */
+noBtn.addEventListener("mouseover",()=>{
+    noBtn.classList.add("spin");
 });
 
-noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * (window.innerWidth - 120);
-    const y = Math.random() * (window.innerHeight - 80);
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-});
-
-yesBtn.addEventListener("click", () => {
-    for(let i = 0; i < 50; i++) {
-        createFlower();
-    }
-
-    document.body.innerHTML = `
-    <div style="text-align:center; margin-top:40vh; font-family:Playfair Display;">
-        <h1 style="color:#c2185b;">💖 Gracias Mi amooorr💖 Tee amooo muchooo 💖</h1>
-        <p style="font-size:22px;">Prometo que será un día hermoso 🌷</p>
-    </div>
-    `;
-});
-
-function createFlower() {
-    const flower = document.createElement("div");
+/* Tulipanes */
+function createFlower(){
+    const flower=document.createElement("div");
     flower.classList.add("flower");
-    flower.innerText = "🌷";
-    flower.style.left = Math.random() * 100 + "vw";
-    flower.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    flower.innerText="🌷";
+    flower.style.left=Math.random()*100+"vw";
+    flower.style.animationDuration=(Math.random()*3+3)+"s";
     document.body.appendChild(flower);
-
-    setTimeout(() => {
-        flower.remove();
-    }, 6000);
+    setTimeout(()=>{ flower.remove(); },6000);
 }
+setInterval(createFlower,900);
 
-setInterval(createFlower, 900);
+yesBtn.addEventListener("click",()=>{
+    for(let i=0;i<50;i++){ createFlower(); }
+    document.body.innerHTML=`
+    <div style="text-align:center;margin-top:40vh;font-family:Playfair Display;">
+        <h1 style="color:#c2185b;">💖 Gracias 💖</h1>
+        <p style="font-size:22px;">Prometo que será un día hermoso 🌷</p>
+    </div>`;
+});
 </script>
 
 </body>
 </html>
-
