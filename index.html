@@ -11,26 +11,64 @@
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #ff758c, #ff7eb3, #ffb199);
+    min-height: 100vh;
+    background: white;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Poppins', sans-serif;
     overflow: hidden;
+    position: relative;
+}
+
+/* Fondo de rosas a los lados */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    width: 150px;
+    height: 100%;
+    background-image: url("https://i.imgur.com/5b6XG6F.png");
+    background-size: cover;
+    background-repeat: repeat-y;
+    z-index: -1;
+}
+
+body::before {
+    left: 0;
+}
+
+body::after {
+    right: 0;
+    transform: scaleX(-1);
+}
+
+/* Contenedor centrado */
+.container {
+    text-align: center;
+}
+
+/* Texto superior */
+.header-text {
+    font-family: 'Playfair Display', serif;
+    color: #c2185b;
+    margin-bottom: 20px;
+    font-size: 18px;
 }
 
 /* SOBRE */
 .envelope {
-    width: 320px;
-    height: 220px;
+    width: 380px;
+    height: 260px;
     background: white;
     position: relative;
     border-radius: 10px;
     cursor: pointer;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
     transition: transform 0.6s ease;
     perspective: 1000px;
+    margin: auto;
 }
 
 .envelope.open {
@@ -40,7 +78,7 @@ body {
 .flap {
     position: absolute;
     width: 100%;
-    height: 110px;
+    height: 130px;
     background: #fff;
     top: 0;
     clip-path: polygon(0 0, 50% 100%, 100% 0);
@@ -54,49 +92,45 @@ body {
 
 .envelope-text {
     position: absolute;
-    bottom: 20px;
+    bottom: 30px;
     width: 100%;
     text-align: center;
     font-family: 'Playfair Display', serif;
     color: #d63384;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 /* CARTA */
 .card {
     display: none;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(15px);
-    padding: 40px;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    padding: 50px;
     border-radius: 25px;
     text-align: center;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    width: 500px;
+    max-width: 90%;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
     animation: fadeIn 1.5s ease forwards;
+    margin: auto;
 }
 
 .main-name {
     font-family: 'Playfair Display', serif;
-    font-size: 40px;
+    font-size: 42px;
     color: #fff;
-    text-shadow: 0 0 15px #ff4da6, 0 0 30px #ff99cc;
+    text-shadow: 0 0 15px #fff;
 }
 
-h2 {
-    color: white;
-}
-
-p {
+p, h2 {
     color: white;
 }
 
 button {
     margin-top: 20px;
-    padding: 10px 25px;
+    padding: 12px 30px;
     border-radius: 30px;
     border: none;
-    font-size: 15px;
+    font-size: 16px;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -117,7 +151,7 @@ button {
     position: absolute;
 }
 
-/* TULIPANES */
+/* Tulipanes */
 .flower {
     position: fixed;
     top: -10px;
@@ -141,10 +175,12 @@ button {
 
 <body>
 
-<!-- Música automática -->
-<audio autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
-</audio>
+<div class="container">
+
+<div class="header-text">
+    <strong>De:</strong> Christian Adrián González Ponce<br>
+    <strong>Para:</strong> Perla Xochilt Montes de Oca Ramos
+</div>
 
 <div class="envelope" id="envelope">
     <div class="flap"></div>
@@ -152,11 +188,13 @@ button {
 </div>
 
 <div class="card" id="card">
-    <h1 class="main-name">Perla Xochitl 💖</h1>
+    <h1 class="main-name">Perla Xochilt 💖</h1>
     <p>Este 14 de febrero quiero preguntarte algo muy especial…</p>
     <h2>¿Te gustaría ser mi San Valentín? 🌷</h2>
     <button id="yesBtn">Sí, acepto ✨</button>
     <button id="noBtn">No</button>
+</div>
+
 </div>
 
 <script>
@@ -186,9 +224,9 @@ yesBtn.addEventListener("click", () => {
     }
 
     document.body.innerHTML = `
-        <div style="color:white; text-align:center; margin-top:40vh; font-family:Playfair Display;">
-            <h1>💖 Te amo mi amooorr, sabía que ibas a decir que sii 💖</h1>
-            <p style="font-size:20px;">Prometo que será un 14 de febrero hermoso ✨🌷</p>
+        <div style="color:#c2185b; text-align:center; margin-top:40vh; font-family:Playfair Display;">
+            <h1>💖 Gracias 💖</h1>
+            <p style="font-size:22px;">Prometo que será un día hermoso 🌷</p>
         </div>
     `;
 });
@@ -211,4 +249,3 @@ setInterval(createFlower, 800);
 
 </body>
 </html>
-
