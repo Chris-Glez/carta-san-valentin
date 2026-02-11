@@ -148,6 +148,12 @@
   @keyframes fall { to { transform: translateY(110vh); } }
   @keyframes fadeIn { from { opacity:0; transform: translateY(40px);} to{opacity:1; transform:translateY(0);} }
 
+  /* Animación para mensaje de amor */
+  @keyframes appearUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
   .celebration-bg {
     position: fixed;
     top:0;
@@ -172,7 +178,7 @@
   }
 
   .celebration-message h1 { font-size:56px; margin-bottom:20px; }
-  .celebration-message p { font-size:24px; }
+  .celebration-message p { font-size:24px; animation: appearUp 1s ease forwards; margin-bottom: 10px;}
 </style>
 </head>
 
@@ -192,7 +198,6 @@
   <div class="card" id="card">
     <h1 class="main-name">Perla Xochilt 💖</h1>
     <p>Este 14 de febrero quiero preguntarte algo muy especial…</p>
-    <p>🌷Amor Te amo demasiado💖Te convertiste en alguien muy importante y especial para mi 💖 Quiero seguir viviendo muchas cosas bonitas contigo mi amoorr💖🌻</p>
     <h2>¿Te gustaría ser mi San Valentín? 🌷</h2>
     <div class="btn-group">
       <button id="yesBtn">Sí, acepto 🌻</button>
@@ -259,6 +264,7 @@ yesBtn.addEventListener('click',()=>{
     <div class="celebration-message">
       <h1>💖 Gracias, Perla 💖</h1>
       <p>Este 14 de febrero será un día inolvidable lleno de amor y magia 🌷🌻</p>
+      <p>🌷Amor Te amo demasiado💖Te convertiste en alguien muy importante y especial para mi 💖 Quiero seguir viviendo muchas cosas bonitas contigo mi amoorr💖🌻</p>
     </div>
   `;
 
