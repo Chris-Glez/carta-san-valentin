@@ -27,7 +27,7 @@
     position: fixed;
     top: 0;
     width: 120px;
-    height: 100vh; /* Para que cubra toda la altura */
+    height: 100vh;
     background: white;
     display: flex;
     flex-wrap: wrap;
@@ -45,7 +45,6 @@
     right: 0;
   }
 
-  /* Las flores llenan los lados */
   .side span {
     margin: 2px;
   }
@@ -77,7 +76,6 @@
     transform: scale(0);
   }
 
-  /* TEXTO DENTRO DEL SOBRE */
   .inside-text {
     position: absolute;
     top: 60px;
@@ -120,25 +118,14 @@
   }
 
   @keyframes heartbeat {
-    0% {
-      transform: scale(1);
-    }
-    25% {
-      transform: scale(1.1);
-    }
-    40% {
-      transform: scale(1);
-    }
-    60% {
-      transform: scale(1.1);
-    }
-    100% {
-      transform: scale(1);
-    }
+    0% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    40% { transform: scale(1); }
+    60% { transform: scale(1.1); }
+    100% { transform: scale(1); }
   }
 
-  p,
-  h2 {
+  p, h2 {
     color: white;
   }
 
@@ -162,15 +149,11 @@
     transform: scale(1.2);
   }
 
-  /* BOTÓN NO SOLO SE MUEVE */
   #noBtn {
     background: transparent;
     color: white;
     border: 1px solid white;
-    position: absolute;
-    left: 60%;
-    top: 60%;
-    transition: transform 0.1s linear;
+    position: relative; /* ya no se mueve */
   }
 
   /* TULIPANES */
@@ -183,23 +166,14 @@
   }
 
   @keyframes fall {
-    to {
-      transform: translateY(110vh);
-    }
+    to { transform: translateY(110vh); }
   }
 
   @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  /* FONDO CON FLORES Y TEXTO DESPUÉS DE "Sí" */
   .celebration-bg {
     position: fixed;
     top: 0;
@@ -251,7 +225,7 @@
       <h1 class="main-name">Perla Xochilt 💖</h1>
       <p>Este 14 de febrero quiero preguntarte algo muy especial…</p>
       <h2>¿Te gustaría ser mi San Valentín? 🌷</h2>
-      <button id="yesBtn">Sí, acepto ✨</button>
+      <button id="yesBtn">Sí, acepto 🌻</button>
       <button id="noBtn">No</button>
     </div>
   </div>
@@ -276,45 +250,13 @@
     fillRoses(leftSide);
     fillRoses(rightSide);
 
+    // Abrir sobre
     envelope.addEventListener('click', () => {
       envelope.classList.add('open');
       setTimeout(() => {
         envelope.style.display = 'none';
         card.style.display = 'block';
       }, 600);
-    });
-
-    // Botón NO solo se mueve cuando pasas el mouse, sin girar
-    let moveInterval;
-    noBtn.addEventListener('mouseenter', () => {
-      let x = noBtn.offsetLeft;
-      let y = noBtn.offsetTop;
-      let directionX = 1;
-      let directionY = 1;
-
-      if (moveInterval) clearInterval(moveInterval);
-      moveInterval = setInterval(() => {
-        // Límites para que no salga del card
-        let maxX = card.clientWidth - noBtn.clientWidth - 20;
-        let maxY = card.clientHeight - noBtn.clientHeight - 20;
-
-        if (x >= maxX) directionX = -1;
-        if (x <= 0) directionX = 1;
-        if (y >= maxY) directionY = -1;
-        if (y <= 0) directionY = 1;
-
-        x += directionX * 10;
-        y += directionY * 10;
-
-        noBtn.style.left = x + 'px';
-        noBtn.style.top = y + 'px';
-      }, 100);
-    });
-
-    noBtn.addEventListener('mouseleave', () => {
-      if (moveInterval) clearInterval(moveInterval);
-      noBtn.style.left = '60%';
-      noBtn.style.top = '60%';
     });
 
     // Tulipanes cayendo
@@ -325,9 +267,7 @@
       flower.style.left = Math.random() * 100 + 'vw';
       flower.style.animationDuration = (Math.random() * 3 + 3) + 's';
       document.body.appendChild(flower);
-      setTimeout(() => {
-        flower.remove();
-      }, 6000);
+      setTimeout(() => { flower.remove(); }, 6000);
     }
     setInterval(createFlower, 900);
 
@@ -342,7 +282,7 @@
           <p>Este 14 de febrero será un día inolvidable lleno de amor y magia 🌷✨</p>
         </div>
       `;
- 
+
       const leftSideCelebration = document.getElementById('leftSideCelebration');
       const rightSideCelebration = document.getElementById('rightSideCelebration');
 
@@ -357,7 +297,6 @@
       fillRosesCelebration(leftSideCelebration);
       fillRosesCelebration(rightSideCelebration);
 
-      // Añadir muchas flores cayendo rápido
       function createCelebrationFlower() {
         const flower = document.createElement('div');
         flower.classList.add('flower');
@@ -366,9 +305,7 @@
         flower.style.left = Math.random() * 100 + 'vw';
         flower.style.animationDuration = (Math.random() * 2 + 2) + 's';
         document.body.appendChild(flower);
-        setTimeout(() => {
-          flower.remove();
-        }, 6000);
+        setTimeout(() => { flower.remove(); }, 6000);
       }
       setInterval(createCelebrationFlower, 250);
     });
