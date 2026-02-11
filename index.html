@@ -127,7 +127,6 @@
   #yesBtn { background: white; color: #d63384; }
   #yesBtn:hover { transform: scale(1.2); }
 
-  /* Botón NO estático al lado y efecto desvanecimiento */
   #noBtn {
     background: transparent;
     color: white;
@@ -139,16 +138,21 @@
 
   .flower {
     position: fixed;
-    top: -10px;
+    top: -20px;
     font-size: 26px;
     animation: fall linear infinite;
-    opacity: 0.8;
+    opacity: 0.9;
   }
 
-  @keyframes fall { to { transform: translateY(110vh); } }
-  @keyframes fadeIn { from { opacity:0; transform: translateY(40px);} to{opacity:1; transform:translateY(0);} }
+  @keyframes fall { 
+    to { transform: translateY(120vh); } 
+  }
 
-  /* Animación para mensaje de amor */
+  @keyframes fadeIn { 
+    from { opacity:0; transform: translateY(40px);} 
+    to{opacity:1; transform:translateY(0);} 
+  }
+
   @keyframes appearUp {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
@@ -190,13 +194,13 @@
   <div class="envelope" id="envelope">
     <div class="inside-text">
       <strong>De:</strong> Christian Adrián González Ponce<br />
-      <strong>Para:</strong> Perla Xochitl Montes de Oca Ramos
+      <strong>Para:</strong> Perla Xochilt Montes de Oca Ramos
     </div>
     <div class="envelope-text">💌 Toca para abrir</div>
   </div>
 
   <div class="card" id="card">
-    <h1 class="main-name">💖 Perla Xochitl 💖</h1>
+    <h1 class="main-name">Perla Xochilt 💖</h1>
     <p>Para este 14 de febrero quiero preguntarte algo muy especial…</p>
     <h2>¿Te gustaría ser mi San Valentín? 🌷</h2>
     <div class="btn-group">
@@ -214,7 +218,6 @@ const yesBtn = document.getElementById('yesBtn');
 const leftSide = document.getElementById('leftSide');
 const rightSide = document.getElementById('rightSide');
 
-// Llenar laterales con rosas
 function fillRoses(side){
   side.innerHTML='';
   for(let i=0;i<60;i++){
@@ -226,7 +229,6 @@ function fillRoses(side){
 fillRoses(leftSide);
 fillRoses(rightSide);
 
-// Abrir sobre
 envelope.addEventListener('click',()=>{
   envelope.classList.add('open');
   setTimeout(()=>{
@@ -235,19 +237,21 @@ envelope.addEventListener('click',()=>{
   },600);
 });
 
-// Tulipanes cayendo
+// 🌷🌻🌸 FLORES (más rápido y más cantidad)
 function createFlower(){
   const flower = document.createElement('div');
   flower.classList.add('flower');
-  flower.innerText='🌷';
-  flower.style.left = Math.random()*100+'vw';
-  flower.style.animationDuration = (Math.random()*3+3)+'s';
-  document.body.appendChild(flower);
-  setTimeout(()=>{flower.remove();},6000);
-}
-setInterval(createFlower,900);
 
-// Botón NO: desvanecerse al pasar mouse
+  const flowers = ['🌷','🌻','🌸'];
+  flower.innerText = flowers[Math.floor(Math.random()*flowers.length)];
+
+  flower.style.left = Math.random()*100+'vw';
+  flower.style.animationDuration = (Math.random()*2+2)+'s'; // más rápido
+  document.body.appendChild(flower);
+  setTimeout(()=>{flower.remove();},5000);
+}
+setInterval(createFlower,500); // más cantidad
+
 noBtn.addEventListener('mouseenter', () => {
   noBtn.style.opacity = '0';
 });
@@ -255,47 +259,39 @@ noBtn.addEventListener('mouseleave', () => {
   noBtn.style.opacity = '1';
 });
 
-// Cuando dice SÍ
 yesBtn.addEventListener('click',()=>{
   document.body.innerHTML=`
     <div class="side left" id="leftSideCelebration"></div>
     <div class="side right" id="rightSideCelebration"></div>
-    <div class="celebration-bg" id="celebrationBg"></div>
+    <div class="celebration-bg"></div>
     <div class="celebration-message">
       <h1>💖 Gracias, Mi amoorr 💖</h1>
       <p>🌻Este 14 de febrero será un día muy bonito a tu lado, lleno de amor🌻</p>
       <p>🌷Amor Te amo demasiado💖Te convertiste en alguien muy importante y especial para mi 💖 Quiero seguir viviendo muchas cosas bonitas contigo mi amoorr💖🌻</p>
-      <p> 🌷TE AMO🌷 </p>  
+      <p>🌷TE AMO🌷</p>  
     </div>
   `;
 
   const leftSideCelebration = document.getElementById('leftSideCelebration');
   const rightSideCelebration = document.getElementById('rightSideCelebration');
 
-  function fillRosesCelebration(side){
-    side.innerHTML='';
-    for(let i=0;i<60;i++){
-      const rose=document.createElement('span');
-      rose.textContent='🌹';
-      side.appendChild(rose);
-    }
-  }
-  fillRosesCelebration(leftSideCelebration);
-  fillRosesCelebration(rightSideCelebration);
+  fillRoses(leftSideCelebration);
+  fillRoses(rightSideCelebration);
 
   function createCelebrationFlower(){
     const flower=document.createElement('div');
     flower.classList.add('flower');
-    flower.style.fontSize='30px';
-    flower.innerText = Math.random()<0.5?'🌷':'🌻';
+
+    const flowers = ['🌷','🌻','🌸'];
+    flower.innerText = flowers[Math.floor(Math.random()*flowers.length)];
+
     flower.style.left=Math.random()*100+'vw';
-    flower.style.animationDuration=(Math.random()*2+2)+'s';
+    flower.style.animationDuration=(Math.random()*1.5+1.5)+'s';
     document.body.appendChild(flower);
-    setTimeout(()=>{flower.remove();},6000);
+    setTimeout(()=>{flower.remove();},4000);
   }
-  setInterval(createCelebrationFlower,250);
+  setInterval(createCelebrationFlower,150);
 });
 </script>
 </body>
 </html>
-
