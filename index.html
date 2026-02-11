@@ -16,7 +16,7 @@
     justify-content: center;
     align-items: center;
     font-family: 'Poppins', sans-serif;
-    background: white;
+    background: linear-gradient(135deg, #ff9eb5, #ff6f91);
     overflow: hidden;
     position: relative;
     transition: background 1s ease;
@@ -27,7 +27,7 @@
     position: fixed;
     top: 0;
     width: 120px;
-    height: 100%;
+    height: 100vh; /* Para que cubra toda la altura */
     background: white;
     display: flex;
     flex-wrap: wrap;
@@ -48,17 +48,6 @@
   /* Las flores llenan los lados */
   .side span {
     margin: 2px;
-  }
-
-  /* FONDO CENTRAL ROSITA */
-  .center-bg {
-    position: absolute;
-    width: 70%;
-    height: 100%;
-    background: linear-gradient(135deg, #ff9eb5, #ff6f91);
-    z-index: -1;
-    border-radius: 20px;
-    transition: background 1s ease;
   }
 
   /* CONTENEDOR */
@@ -173,7 +162,7 @@
     transform: scale(1.2);
   }
 
-  /* BOTÓN NO QUE GIRA Y SE MUEVE */
+  /* BOTÓN NO SOLO SE MUEVE */
   #noBtn {
     background: transparent;
     color: white;
@@ -181,20 +170,7 @@
     position: absolute;
     left: 60%;
     top: 60%;
-    transform-origin: center center;
-  }
-
-  .spin {
-    animation: spin 1s linear infinite;
-  }
-
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+    transition: transform 0.1s linear;
   }
 
   /* TULIPANES */
@@ -261,7 +237,6 @@
 <body>
   <div class="side left" id="leftSide"></div>
   <div class="side right" id="rightSide"></div>
-  <div class="center-bg" id="centerBg"></div>
 
   <div class="container">
     <div class="envelope" id="envelope">
@@ -288,7 +263,6 @@
     const yesBtn = document.getElementById('yesBtn');
     const leftSide = document.getElementById('leftSide');
     const rightSide = document.getElementById('rightSide');
-    const centerBg = document.getElementById('centerBg');
 
     // Llenar laterales con rosas
     function fillRoses(side) {
@@ -310,12 +284,9 @@
       }, 600);
     });
 
-    // Botón NO gira y se mueve dentro de la carta
+    // Botón NO solo se mueve cuando pasas el mouse, sin girar
     let moveInterval;
     noBtn.addEventListener('mouseenter', () => {
-      noBtn.classList.add('spin');
-
-      let angle = 0;
       let x = noBtn.offsetLeft;
       let y = noBtn.offsetTop;
       let directionX = 1;
@@ -323,14 +294,10 @@
 
       if (moveInterval) clearInterval(moveInterval);
       moveInterval = setInterval(() => {
-        angle += 15;
-        if (angle >= 360) angle = 0;
-
-        // Mover dentro límites del card
+        // Límites para que no salga del card
         let maxX = card.clientWidth - noBtn.clientWidth - 20;
         let maxY = card.clientHeight - noBtn.clientHeight - 20;
 
-        // Cambiar dirección si toca borde
         if (x >= maxX) directionX = -1;
         if (x <= 0) directionX = 1;
         if (y >= maxY) directionY = -1;
@@ -341,17 +308,13 @@
 
         noBtn.style.left = x + 'px';
         noBtn.style.top = y + 'px';
-        noBtn.style.transform = `rotate(${angle}deg)`;
       }, 100);
     });
 
     noBtn.addEventListener('mouseleave', () => {
-      noBtn.classList.remove('spin');
       if (moveInterval) clearInterval(moveInterval);
-      // Volver al centro aproximado
       noBtn.style.left = '60%';
       noBtn.style.top = '60%';
-      noBtn.style.transform = 'rotate(0deg)';
     });
 
     // Tulipanes cayendo
@@ -370,7 +333,6 @@
 
     // Cuando dice SÍ
     yesBtn.addEventListener('click', () => {
-      // Limpiar el body y poner fondo de celebración
       document.body.innerHTML = `
         <div class="side left" id="leftSideCelebration"></div>
         <div class="side right" id="rightSideCelebration"></div>
@@ -381,7 +343,6 @@
         </div>
       `;
  
-      // Llenar laterales con rosas en celebración también
       const leftSideCelebration = document.getElementById('leftSideCelebration');
       const rightSideCelebration = document.getElementById('rightSideCelebration');
 
