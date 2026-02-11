@@ -194,13 +194,13 @@
   <div class="envelope" id="envelope">
     <div class="inside-text">
       <strong>De:</strong> Christian Adrián González Ponce<br />
-      <strong>Para:</strong> Perla Xochilt Montes de Oca Ramos
+      <strong>Para:</strong> Perla Xochitl Montes de Oca Ramos
     </div>
     <div class="envelope-text">💌 Toca para abrir</div>
   </div>
 
   <div class="card" id="card">
-    <h1 class="main-name">Perla Xochilt 💖</h1>
+    <h1 class="main-name">Perla Xochitl 💖</h1>
     <p>Para este 14 de febrero quiero preguntarte algo muy especial…</p>
     <h2>¿Te gustaría ser mi San Valentín? 🌷</h2>
     <div class="btn-group">
@@ -237,20 +237,20 @@ envelope.addEventListener('click',()=>{
   },600);
 });
 
-// 🌷🌻🌸 FLORES (más rápido y más cantidad)
+// 🌷🌻🌹 FLORES (más rápido y más cantidad)
 function createFlower(){
   const flower = document.createElement('div');
   flower.classList.add('flower');
 
-  const flowers = ['🌷','🌻','🌸'];
+  const flowers = ['🌷','🌻','🌹'];
   flower.innerText = flowers[Math.floor(Math.random()*flowers.length)];
 
   flower.style.left = Math.random()*100+'vw';
-  flower.style.animationDuration = (Math.random()*2+2)+'s'; // más rápido
+  flower.style.animationDuration = (Math.random()*2+2)+'s';
   document.body.appendChild(flower);
   setTimeout(()=>{flower.remove();},5000);
 }
-setInterval(createFlower,500); // más cantidad
+setInterval(createFlower,500);
 
 noBtn.addEventListener('mouseenter', () => {
   noBtn.style.opacity = '0';
@@ -282,7 +282,7 @@ yesBtn.addEventListener('click',()=>{
     const flower=document.createElement('div');
     flower.classList.add('flower');
 
-    const flowers = ['🌷','🌻','🌸'];
+    const flowers = ['🌷','🌻','🌹'];
     flower.innerText = flowers[Math.floor(Math.random()*flowers.length)];
 
     flower.style.left=Math.random()*100+'vw';
