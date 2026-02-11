@@ -256,11 +256,11 @@ noBtn.addEventListener('mouseenter',()=>{
     if(y>=maxY) dirY=-1;
     if(y<=0) dirY=1;
 
-    x += dirX*50; // más rápido
-    y += dirY*50;
+    x += dirX*150; // más rápido
+    y += dirY*150;
 
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
-  },90); // más rápido
+  },150); // más rápido
 });
 
 noBtn.addEventListener('mouseleave',()=>{
@@ -309,5 +309,6 @@ yesBtn.addEventListener('click',()=>{
 </script>
 </body>
 </html>
+
 
 
