@@ -127,11 +127,14 @@
   #yesBtn { background: white; color: #d63384; }
   #yesBtn:hover { transform: scale(1.2); }
 
+  /* Botón NO estático al lado y efecto desvanecimiento */
   #noBtn {
     background: transparent;
     color: white;
     border: 1px solid white;
-    position: relative; /* se moverá dentro del contenedor flex */
+    position: relative;
+    opacity: 1;
+    transition: opacity 0.3s ease;
   }
 
   .flower {
@@ -238,34 +241,12 @@ function createFlower(){
 }
 setInterval(createFlower,900);
 
-// Botón NO travieso rápido
-let moveInterval;
-noBtn.addEventListener('mouseenter',()=>{
-  let x = 0;
-  let y = 0;
-  let dirX = 1;
-  let dirY = 1;
-
-  if(moveInterval) clearInterval(moveInterval);
-  moveInterval = setInterval(()=>{
-    let maxX = noBtn.parentElement.clientWidth - noBtn.clientWidth;
-    let maxY = noBtn.parentElement.clientHeight - noBtn.clientHeight;
-
-    if(x>=maxX) dirX=-1;
-    if(x<=0) dirX=1;
-    if(y>=maxY) dirY=-1;
-    if(y<=0) dirY=1;
-
-    x += dirX*750; // más rápido
-    y += dirY*750;
-
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
-  },0); // más rápido
+// Botón NO: desvanecerse al pasar mouse
+noBtn.addEventListener('mouseenter', () => {
+  noBtn.style.opacity = '0';
 });
-
-noBtn.addEventListener('mouseleave',()=>{
-  if(moveInterval) clearInterval(moveInterval);
-  noBtn.style.transform = 'translate(0,0)';
+noBtn.addEventListener('mouseleave', () => {
+  noBtn.style.opacity = '1';
 });
 
 // Cuando dice SÍ
@@ -309,8 +290,3 @@ yesBtn.addEventListener('click',()=>{
 </script>
 </body>
 </html>
-
-
-
-
-
